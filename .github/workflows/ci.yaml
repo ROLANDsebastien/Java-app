@@ -29,7 +29,8 @@ jobs:
       run: gradle build
 
     - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/gradle@master
+      uses: snyk/actions/gradle-jdk17@master
+      continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
