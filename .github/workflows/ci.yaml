@@ -29,10 +29,15 @@ jobs:
       run: gradle build
 
     - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/gradle-jdk17@master
+      run: |
+        unset JAVA_HOME
+        docker run --rm \
+          -e SNYK_TOKEN=${{ secrets.SNYK_TOKEN }} \
+          -v "$PWD:/project" \
+          -w "/project" \
+          snyk/snyk:gradle-jdk17 \
+          snyk test --gradle-sub-project=.
       continue-on-error: true
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
     - name: Docker Meta
       id: meta
