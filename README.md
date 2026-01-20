@@ -16,11 +16,19 @@ A Spring Boot application built with Gradle, automatically deployed via GitHub A
 
 The `.github/workflows/ci.yaml` workflow automatically:
 - Builds the application with Gradle
-- Scans for vulnerabilities using Snyk
+- Scans for vulnerabilities using Snyk (dependencies & Docker)
+- Uploads Snyk security results to GitHub Security tab (Code Scanning)
 - Creates a Docker image with multi-architecture support (linux/amd64, linux/arm64)
 - Scans the Docker image for vulnerabilities using Snyk
 - Pushes the image to GitHub Container Registry (GHCR)
 - Tags images as `latest` (for main branch) and with commit SHA
+
+### Security Scanning
+
+- **Snyk dependency scanning**: Checks Gradle dependencies for vulnerabilities
+- **Snyk Docker scanning**: Scans Docker images for security issues
+- **GitHub Security tab**: Results are published as SARIF for review
+- **Artifacts**: Full reports are available as workflow artifacts
 
 ## Running the Application
 

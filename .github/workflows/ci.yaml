@@ -36,7 +36,13 @@ jobs:
           -v "$PWD:/project" \
           -w "/project" \
           snyk/snyk:gradle-jdk17 \
-          snyk test --gradle
+          snyk test --gradle --sarif-file-output=/project/snyk.sarif
+      continue-on-error: true
+
+    - name: Upload Snyk results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: snyk.sarif
       continue-on-error: true
 
     - name: Docker Meta
@@ -78,7 +84,22 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: ${{ fromJson(steps.meta.outputs.json).tags[0] }}
-        args: --severity-threshold=high
+        args: --severity-threshold=high --sarif-file-output=docker-snyk.sarif
+
+    - name: Upload Snyk Docker results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: docker-snyk.sarif
+      continue-on-error: true
+
+    - name: Upload Snyk reports as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: snyk-reports
+        path: |
+          snyk.sarif
+          docker-snyk.sarif
+      continue-on-error: true
 
     # Optional: Trigger ArgoCD or Update values.yaml (GitOps)
     # - name: Update Image Tag in Helm
