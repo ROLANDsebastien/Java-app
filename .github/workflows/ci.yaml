@@ -77,7 +77,7 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        image: ghcr.io/${{ github.repository }}:latest
+        image: ${{ fromJson(steps.meta.outputs.json).tags[0] }}
         args: --severity-threshold=high
 
     # Optional: Trigger ArgoCD or Update values.yaml (GitOps)
