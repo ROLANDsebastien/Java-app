@@ -48,13 +48,14 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+     - name: Build and push Docker image
+       uses: docker/build-push-action@v5
+       with:
+         context: .
+         push: ${{ github.event_name != 'pull_request' }}
+         tags: ${{ steps.meta.outputs.tags }}
+         labels: ${{ steps.meta.outputs.labels }}
+         platforms: linux/amd64,linux/arm64
 
     # Optional: Trigger ArgoCD or Update values.yaml (GitOps)
     # - name: Update Image Tag in Helm
