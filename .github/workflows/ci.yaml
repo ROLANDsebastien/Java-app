@@ -25,6 +25,7 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      continue-on-error: true
 
     - name: Build with Gradle
       run: gradle build
