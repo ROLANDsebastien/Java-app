@@ -11,6 +11,8 @@ spec:
       {{- include "java-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        rollout-id: {{ randAlphaNum 5 | quote }}
       labels:
         {{- include "java-app.selectorLabels" . | nindent 8 }}
     spec:
