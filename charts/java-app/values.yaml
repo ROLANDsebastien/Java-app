@@ -1,5 +1,5 @@
 image:
-  repository: user/java-app
+  repository: ghcr.io/rolandsebastien/java-app
   pullPolicy: IfNotPresent
   tag: "latest"
 
