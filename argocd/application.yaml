@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/USERNAME/REPO_NAME.git  # UPDATE THIS
+    repoURL: https://github.com/ROLANDsebastien/Java-app.git  # SOURCE DE VÉRITÉ GITHUB
     targetRevision: HEAD
     path: charts/java-app
   destination:
