@@ -27,9 +27,9 @@ public class KafkaService {
 
     @KafkaListener(topics = TOPIC, groupId = "java-app-group")
     public void listen(String message) {
-        System.out.println("Message reçu de Kafka: " + message);
-        receivedMessages.add(0, message); // Ajouter au début pour voir les plus récents
-        if (receivedMessages.size() > 50) {
+        System.out.println("Message received from Kafka: " + message);
+        receivedMessages.add(0, message); // Add to the beginning to see newest first
+        if (receivedMessages.size() > 1000) {
             receivedMessages.remove(receivedMessages.size() - 1);
         }
     }
