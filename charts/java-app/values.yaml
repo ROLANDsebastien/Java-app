@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/rolandsebastien/java-app
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "latest"
 
 service:
